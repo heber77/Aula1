@@ -14,3 +14,5 @@ class Boleto(Pagamentos):
 
     def getCodigo (self):
         return self.codigo
+
+print("teste")
