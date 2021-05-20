@@ -9,7 +9,7 @@ class Pagamentos():
 
     def fazerPagamento(self):
         print("quer fazer o pagamento?")
-
+        
     def escolherMeioPgt(self):
         print("O meio escolhido foi {self.meio_pagamento}")
 
