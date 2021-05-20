@@ -11,12 +11,14 @@ class Pix(Pagamentos):
 
     def setcodigoPix(self, codigoPix):
         self.codigoPix = codigoPix
+        
 
     def getcodigoPix (self):
         return self.codigoPix
 
     def setqrcod(self, qrcod):
         self.qrcod = qrcod
+
 
     def getqrcod (self):
         return self.qrcod

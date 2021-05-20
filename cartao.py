@@ -17,6 +17,7 @@ class Cartao(Pagamentos):
 
     def getnumCartao (self):
         return self.numCartao
+        
 
     def setnomeTitular(self, nomeTitular):
         self.nomeTitular = nomeTitular

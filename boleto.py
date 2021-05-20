@@ -12,7 +12,7 @@ class Boleto(Pagamentos):
     def setCodigo(self, codigo):
         self.codigo = codigo
 
+
     def getCodigo (self):
         return self.codigo
 
-print("teste")
