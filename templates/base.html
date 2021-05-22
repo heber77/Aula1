@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menu Click</title>
+    <link rel="stylesheet" href="static/style.css" />
+</head>
+
+<body>
+    <img src="logo.png">
+    <section class="hero is-primary is-fullheight">
+
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+
+                    <div id="navbarMenuHeroA" class="navbar-menu">
+                        <div class="navbar-end">
+                            <a href="{{ url_for('main.index') }}" class="navbar-item">
+                                Home
+                            </a>
+                            <a href="{{ url_for('main.teste_gratis') }}" class="navbar-item">
+                                Teste grátis
+                            </a>
+                            
+                            <a href="{{ url_for('main.cases_sucesso') }}" class="navbar-item">
+                                Cases de Sucesso
+                            </a>
+                            <a href="{{ url_for('main.duvidas_frequentes') }}" class="navbar-item">
+                                Dúvidas Frequentes
+                            </a>
+
+                            <a href="{{ url_for('main.Suporte') }}" class="navbar-item">
+                                Suporte
+                            </a>
+
+                            
+                            <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                                Sign Up
+                            </a>
+
+
+                            <a>
+                                <form>
+                                    <label> Login : <input type="email" name="Login" placeholder="user@domain.com"></label>
+                                </form>
+                            </a>
+
+                            <a>
+                                <form>
+                                    <label> Senha: <input type="password" name="senha"placeholder="Sua Senha"></label>
+                                    </form>
+                                 </a>
+                            <a><button class="button  sign-in">Entrar</button></a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+        <div class="hero-body">
+            <div class="container has-text-centered">
+               {% block content %}
+               {% endblock %}
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
