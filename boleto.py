@@ -6,7 +6,7 @@ class Boleto(Pagamentos):
         self.codigo = codigo
 
     def gera_boleto(self):
-        print("O codigo do seu boleto eh {self.codigo}")
+        print(f"O codigo do seu boleto eh {self.codigo}")
 
 
     def setCodigo(self, codigo):
