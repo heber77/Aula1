@@ -5,8 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Flask Auth Example</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <title>Click</title>
+    <img src="logo.png" alt="CLICK">
+    <link rel="stylesheet" href= />
+    <link rel="stylesheet" href="static/button.css" />
+    
 </head>
 
 <body>
@@ -35,11 +38,15 @@
                             </a>
                             {% endif %}
 
-                            
-
                             {% if current_user.is_authenticated %}
                             <a href="{{ url_for('main.profile') }}" class="navbar-item">
                                 Profile
+                            </a>
+                            {% endif %}
+
+                            {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('main.suporte_2') }}" class="navbar-item">
+                                Suporte
                             </a>
                             {% endif %}
 
@@ -69,6 +76,17 @@
             </div>
         </div>
     </section>
+    <footer>
+        <center>
+            <ul>
+             <h6 class="white-text">Nossas Redes Sociais:</h6>   
+             <a><img href="#!" src="imagens/facebook.png"></a>
+             <a><img href="#!" src="imagens/twitter.png"></a>
+             <a><img href="#!" src="imagens/youtube.png"></a>
+             <a><img href="#!" src="imagens/instagram.png"></a>
+            </ul>
+            </center>
+    </footer>
 </body>
 
 </html>

@@ -1,13 +1,13 @@
 from flask import Flask, request, send_from_directory, jsonify
+import flask
+from flask.wrappers import Response
 import base64 as request
 import datetime
 from os.path import isfile, join
 from mimetypes import MimeTypes, File
 from os import listdir
-import flask
-from flask.wrappers import Response
-from wand.image import Video
-import wand.image as object 
+from wand.image import Image
+import wand.image
 import hashlib
 import json
 import time
@@ -15,7 +15,7 @@ import hmac
 import copy
 import sys
 import os
-import wand.image as BaseAdapter
+import wand.image
 
 # Crie um diretório público na inicialização.
 BASE_DIR = os.path.dirname (os.path.abspath (__file__))
@@ -37,105 +37,116 @@ def  get_public (path) :
 def  get_static (path) : 
    return send_from_directory ( "./" , path)
 
-@ app.route ("/ upload_video", methods = ["POST"]) 
-def  upload_video () : 
-    try:
-        response = Video.upload (FlaskAdapter (request), "/ public /" )
-    except Exception:
-        response = { "erro" : str (sys.exc_info () [ 1 ])}
-        return json.dumps (response)
+@ app.route ("/ upload_image", methods = ["POST"]) 
+def  upload_image () : 
+   try:
+       response = Image.upload (FlaskAdapter (request), "/ public /" )
+   except Exception:
+       response = { "erro" : str (sys.exc_info () [ 1 ])}
+   return json.dumps (response)
 
-@ app.route ("/ upload_video_validation", methods = ["POST"]) 
-def  upload_video_validation () :
+@ app.route ("/ upload_image_validation", methods = ["POST"]) 
+def  upload_image_validetion () : 
+   def  validetion(filePath, mimetype) : 
+       with wand.image.Image (filename = filePath) as img:
+            if img.width != img.height:
+                return  False 
+            return  True
 
-     def validation (filePath, mimetype):
-        size = os.path.getsize (filePath)
-        if size> 50 * 1024 * 1024 :
-             return  False 
-        return True
-
-     options = {
-        "nomedocampo" : "meuArquivo" ,
-         "validação" : validation
-    }
-     try:
-        response = Video.upload (FlaskAdapter (request), "/ public /" , options)
-     except Exception:
-        response = { "erro" : str (sys.exc_info () [ 1 ])}
-        return json.dumps (response)
+   options = {
+       "fieldname" : "myImage" ,
+        "validation" : validetion
+   }
+   
+   try:
+       response = Image.upload (FlaskAdapter (request), "/ public /" , options)
+   except Exception:
+       response = { "erro" : str (sys.exc_info () [ 1 ])}
+   return json.dumps (response)
 
 
-class  Video (object) :
-    defaultUploadOptions = {
-        "fieldname" : "file" ,
-         "validation" : {
-             "allowedExts" : [ "mp4" , "webm" , "ogg" ],
-             "allowedMimeTypes" : [ "video / mp4" , "video / webm" , "video / ogg " ]
-        }
-    }
+class  Image(object):
 
-    @staticmethod 
-    def  upload (req, fileRoute, options = None) : 
-        """
-        Upload de vídeo para o disco.
-        Parâmetros:
-            req: adaptador de estrutura para solicitação http. Consulte BaseAdapter.
-            fileRoute: string
-            options: dict opcional, consulte o atributo defaultUploadOptions
-        Retornar:
-            dict: {link: "linkPath"}
-        """
+   defaultUploadOptions = {
+       "fieldname" : "arquivo" ,
+        "validação" : {
+            "allowedExts" : [ "gif" , "jpeg" , "jpg" , "png" , "svg" , "blob" ],
+            "allowedMimeTypes" : [ "imagem / gif " , " imagem / jpeg " , " imagem / pjpeg " , " imagem / x-png " , " imagem / png " ,
+                                 " imagem / svg + xml " ]
+       },
+       # string resize param de http://docs.wand-py.org/en/0.4.3/guide/resizecrop.html#transform-images 
+       # Exemplos: "100x100", "100x100!". Encontre mais em http://www.imagemagick.org/script/command-line-processing.php#geometry 
+       "resize" : None
+   }
 
-        if options ==  None :
-            options = Video.defaultUploadOptions
-        else :
-            options = Utils.merge_dicts (Video.defaultUploadOptions, options)
+   @staticmethod 
+   def  upload (req, fileRoute, options = None) : 
+       """
+       Carregamento de imagem para o disco.
+       Parâmetros:
+           req: adaptador de estrutura para solicitação http. Consulte BaseAdapter.
+           fileRoute: string
+           options: dict opcional, consulte o atributo defaultUploadOptions
+       Retornar:
+           dict: {link: "linkPath"}
+       """
 
-        return File.upload (req, fileRoute, options)
+       if  options == None :
+           options = Image.defaultUploadOptions
+       else:
+           options = Utils.merge_dicts (Image.defaultUploadOptions, options)
 
-    @staticmethod 
-    def  delete (src) :
+       return File.upload (req, fileRoute, options)
 
-        return File.delete (src)
+   @staticmethod 
+   def  delete (src) : 
+       """
+       Exclua a imagem do disco.
+       Parâmetros:
+           src: string
+       """ 
+       return File.delete (src)
 
-    @staticmethod 
-    def  list (folderPath, thumbPath = None) : 
-        """
-        Liste vídeos do disco.
-        Parâmetros:
-            folderPath: string
-            thumbPath: string
-        Retornar:
-            lista: lista de vídeos dictos. exemplo: [{url: "url", polegar: "polegar", nome: "nome"}, ...]
-        """
+   @staticmethod 
+   def  list (folderPath, thumbPath = None) : 
+       """
+       Lista as imagens do disco.
+       Parâmetros:
+           folderPath: string
+           thumbPath: string
+       Retornar:
+           lista: lista de listas de imagens. exemplo: [{url: "url", polegar: "polegar", nome: "nome"}, ...]
+       """
 
-        if thumbPath == None :
-            thumbPath = folderPath
+       if thumbPath == None :
+           thumbPath = folderPath
 
-        # Matriz de objetos de vídeo a serem retornados.
-        response = []
+       # Matriz de objetos de imagem a serem retornados.
+       resposta = []
 
-        absolutoFolderPath = Utils.getServerPath () + folderPath
+       absoluteFolderPath = Utils.getServerPath () + folderPath
 
-        # Tipos de vídeo. 
-        videoTypes = Video.defaultUploadOptions [ "validação" ] [ "allowedMimeTypes" ]
+       # Tipos de imagem. 
+       imageTypes = Image.defaultUploadOptions [ "validação" ] [ "allowedMimeTypes" ]
 
-        # Nomes de arquivos na pasta de uploads. 
-        fnames = [f for f in listdir (absolutoFolderPath) if isfile (join (absolutoFolderPath, f))]
+       # Nomes de arquivos na pasta de uploads. 
+       fnames = [f for f in listdir (absoluteFolderPath) if isfile (join (absoluteFolderPath, f))]
 
-        for fname in fnames:
-            mime = MimeTypes ()
-            mimeType = mime.guess_type (absolutoFolderPath + fname) [ 0 ]
+       for fname in fnames:
+           mime = MimeTypes ()
+           mimeType = mime.guess_type (absoluteFolderPath + fname) [ 0 ]
 
-            if mimeType in videoTypes:
-                Response.append ({
-                    "url" : folderPath + fname,
-                     "thumb" : thumbPath + fname,
-                     "name" : fname
-                })
-        return response
+           if mimeType in imageTypes:
+               Response.append ({
+                   "url" : folderPath + fname,
+                    "thumb" : thumbPath + fname,
+                    "name" : fname
+               })
 
-class Utils (object): 
+       return resposta
+
+
+class  Utils (object) : 
    """
    Classe estática de utilitários.
    """
@@ -154,7 +165,7 @@ class Utils (object):
 
        # python 2-3 compatível: 
        try:
-           hmac256 = hmac.new (key.encode () if isinstance (key, str) else key, msg = string.encode ( "utf-8" ) if isinstance (string, str) else string, digestmod = hashlib.sha256) # v3 
+          hmac256 = hmac.new (key.encode () if isinstance (key, str) else key, msg = string.encode ( "utf-8" ) if isinstance (string, str) else string, digestmod = hashlib.sha256) # v3 
        except Exception:
            hmac256 = hmac.new (key, msg = string, digestmod = hashlib.sha256) # v2
            return hmac256.hexdigest () if hex else hmac256.digest ()
@@ -173,10 +184,10 @@ class Utils (object):
 
        aClone = copy.deepcopy (a);
        # Retorna profundamente b em a sem afetar as fontes. 
-       if path == None : path = []
+       if path ==  None : path = []
        for key in b:
             if key in a:
-                if isinstance (a [key], dict) is isinstance (b [key], dict):
+                if isinstance (a [key], dict) and isinstance (b [key], dict):
                    aClone [key] = Utils.merge_dicts (a [key], b [key], path + [str (key)])
                 else:
                    aClone [key] = b [key]
@@ -218,11 +229,11 @@ class Utils (object):
        """
 
        # Ignore se as extensões ou tipos MIME permitidos estiverem ausentes. 
-       if allowedExts or  not allowedMimeTypes:
+       if not allowedExts or  not allowedMimeTypes:
             return  False
 
        extension = Utils.getExtension (filename)
-       return extension.lower () in allowedExts and mimetype in allowedMimeTypes
+       return extension.lower () in allowedExts and mimetype in AllowedMimeTypes
 
    @staticmethod 
    def  isValid (validetion, filePath, mimetype) : 
@@ -235,7 +246,7 @@ class Utils (object):
        """
 
        # Sem validação significa que você não deseja validar, portanto, retorne afirmativo. 
-       if not  validetion:
+       if not validetion:
            return  True
 
        # A validação é uma função fornecida pelo usuário. 
@@ -246,9 +257,10 @@ class Utils (object):
             return Utils.isFileValid (filePath, mimetype, validetion [ "allowedExts" ], validetion [ "allowedMimeTypes" ])
 
        # Caso contrário: nenhum comportamento de validação específico encontrado. 
-       return  False
+       return false
 
-class BaseAdapter (object) : 
+
+class BaseAdapter(object) : 
    """
    Interface. Herde esta classe para usar a lib em sua estrutura.
    """
@@ -297,7 +309,7 @@ class BaseAdapter (object) :
        self.riseError ()
 
 
-class FlaskAdapter(BaseAdapter) : 
+class FlaskAdapter (BaseAdapter) : 
    """
    Adaptador de frasco: Verifique BaseAdapter para ver a descrição de quais métodos.
    """
@@ -328,9 +340,7 @@ class Album(jsonify, datetime):
 
     def upload_momento(self,momento, fullNamePath):
       momento = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
-      
-      return '{}'.format(momento)
+      base = FlaskAdapter(BaseAdapter).saveFile(fullNamePath)
+      return '{}:{}'.format(momento, base)
 
-
-
-#https://froala.com/wysiwyg-editor/docs/server/flask/video-upload/
+#https://froala.com/wysiwyg-editor/docs/server/flask/image-upload/

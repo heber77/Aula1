@@ -88,7 +88,8 @@ def signup_post():
     return redirect(url_for('Usuario_1.login'))
 
 from flask import Blueprint, render_template, redirect, url_for, request
-from werkzeug.security import generate_password_hash, check_password_hash
+#from werkzeug.security import generate_password_hash, check_password_hash
+from  flask.ext.bcrypt  import  Bcrypt 
 from .models import User
 from . import db
 ...
@@ -102,9 +103,11 @@ def signup_post():
 
     if user: # if a user is found, we want to redirect back to signup page so user can try again
         return redirect(url_for('auth.signup'))
-
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
-    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
+    new_user = User(email=email, name=name, password= Bcrypt.generate_password_hash(password, method='sha256'))
+    auth_senha = Bcrypt
+    new_user.check_password_hash ( new_user.select(password) , auth_senha )
+
 
     # add the new user to the database
     db.session.add(new_user)
@@ -112,7 +115,7 @@ def signup_post():
 
     return redirect(url_for('auth.login'))
 
-    from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash
 ...
 @auth.route('/signup', methods=['POST'])
 def signup_post():
