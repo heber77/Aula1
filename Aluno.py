@@ -6,18 +6,39 @@ class Aluno(Pessoa):
     def __init__(self, nome, cpf, data_de_nascimento, email, telefone, senha):
         super().__init__(nome, cpf, data_de_nascimento, email, telefone)
         self.senha = senha
+        self.codigo = self.geraCodigo()
+        self.cursosMatriculados = []
+        self.inadimplente = None
+        self.situacaoMtricula = None
+
+
+    def geraCodigo(self):
+        tamanho = 9
+        valores = string.digits
+        codigo = ''
+        for i in range(tamanho):
+            codigo += choice(valores)
+        return codigo
 
     def assistirAulas(self):
         pass
 
     def pagarMensalidade(self):
-        pass
+        if self.inadimplente:
+            print("Não é necessário pagamento!")
+        else:
+            print("Pagamento será afetuado!")
 
     def escolherCurso(self, curso):
-        pass
+
+
 
     def cancelaMatricula(self):
-        pass
+        if self.situacaoMtricula:
+            self.situacaoMtricula = False
+        else:
+            print("Nada a ser feito.")
+
 
     def login(self, email, senha):
         cadastro = open("cadastros.txt", "r")
