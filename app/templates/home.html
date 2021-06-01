@@ -5,32 +5,40 @@
     <title>Click</title>
 </head>
 <body>
-<h1>Click</h1>
     <div>
+        <h1>Click</h1>
+        <form method="post" action="autentica">
         <a href="home"> Home </a>
         <a href="teste_gratis"> Teste grátis </a>
         <a href="cases_sucesso"> Cases de Sucesso </a>
         <a href="duvidas_frequentes"> Dúvidas Frequentes </a>
         <a href="suporte"> Suporte </a>
+
+        <label for="email">E-mail</label>
+        <input type="text" id="email" name="usuario" placeholder="Digite seu e-mail">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+        <input type="submit" name="enviar" value="Autenticar"><input type="reset" name="reset">
+        </form>
     </div>
 
-    <form method="post" action="autentica">
-            <div>
-                <label for="email">E-mail</label>
-                <input type="text" id="email" name="usuario" placeholder="Digite seu e-mail">
-            </div>
-            <div>
-                <label for="senha">Senha</label>
-                <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
-            </div>
-            <input type="submit" name="enviar" value="Autenticar"><input type="reset" name="reset">
-    </form>
-
     <div>
-        <p>Marketing digital para negócio físico</p>
-        <a href="cadastro.html"> Tenho um negócio Físico</a>
-        <p>Marketing digital para negócio online</p>
-        <a href="cadastro.html"> Tenho um negócio online</a>
+        <h3>Marketing digital para negócio físico</h3>
+        <ul>
+        <li>Aprenda a alvancar seu negócio físico</li>
+        <li>Aulas gravadas</li>
+        <li>Aulas ao vivo</li>
+        <li>Mensalidade: R$XX,XX</li>
+        </ul>
+        <a href="cadastro"> <button>Tenho um negócio Físico</button></a>
+        <h3>Marketing digital para negócio online</h3>
+        <ul>
+        <li>Aprenda a alvancar seu negócio digital</li>
+        <li>Aulas gravadas</li>
+        <li>Aulas ao vivo</li>
+        <li>Mensalidade: R$XX,XX</li>
+        </ul>
+        <a href="cadastro"> <button>Tenho um negócio Online</button></a>
     </div>
 
 </body>

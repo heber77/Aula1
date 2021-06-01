@@ -1,21 +1,36 @@
-{% extends "base.html" %} 
-{% block content %}
-<p>
-# falta acrescentar imagem 
-<img src="imagens/" align="right" height="150" width="150">
-<button align="right"></button>
-div class="column is-4 is-offset-4">
-    <h3 class="title"><u>Dúvidas Frequentes</u></h3>
-    <div class="box">
-        <form method="POST" action="/Cadastre-se">
-        
-            <div>
-                <button align= cent href="#!" class= "seis">Qual a mensalidade?</button>
-                <button align= centera href="#!" class ="sete">R$xxxxx</button>
-                <button align= cent href="#!" class ="oito">Qual a mensalidade?</button>
-                <button align= centera href="#!" class ="nove">R$xxxxx</button>
-                <button align= center href="#!" class ="dez">Qual a mensalidade?</button>
-                <button align= center href="#!" class ="onze">R$xxxxx</button>
-                </div>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste grátis</title>
+</head>
+<body>
+    <div>
+        <h1>Click</h1>
+        <form method="post" action="autentica">
+        <a href="home"> Home </a>
+        <a href="teste_gratis"> Teste grátis </a>
+        <a href="cases_sucesso"> Cases de Sucesso </a>
+        <a href="duvidas_frequentes"> Dúvidas Frequentes </a>
+        <a href="suporte"> Suporte </a>
 
+        <label for="email">E-mail</label>
+        <input type="text" id="email" name="usuario" placeholder="Digite seu e-mail">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+        <input type="submit" name="enviar" value="Autenticar"><input type="reset" name="reset">
+        </form>
     </div>
+
+    <h2>Duvidas frequentes</h2>
+    <h3>Qual a mensalidade?</h3>
+    <p>**************************************</p>
+    <h3>Qual a mensalidade?</h3>
+    <p>**************************************</p>
+    <h3>Qual a mensalidade?</h3>
+    <p>**************************************</p>
+
+
+    <a href="teste_gratis"><button>Teste Grátis</button></a>
+
+</body>

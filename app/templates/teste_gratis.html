@@ -1,19 +1,39 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste grátis</title>
+</head>
+<body>
+    <div>
+        <h1>Click</h1>
+        <form method="post" action="autentica">
+        <a href="home"> Home </a>
+        <a href="teste_gratis"> Teste grátis </a>
+        <a href="cases_sucesso"> Cases de Sucesso </a>
+        <a href="duvidas_frequentes"> Dúvidas Frequentes </a>
+        <a href="suporte"> Suporte </a>
 
-<h1><u> Teste nossa plataforma por 7 dias sem pagar nada</u></h1>
+        <label for="email">E-mail</label>
+        <input type="text" id="email" name="usuario" placeholder="Digite seu e-mail">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha">
+        <input type="submit" name="enviar" value="Autenticar"><input type="reset" name="reset">
+        </form>
+    </div>
 
-    <form class="formulario" method="post"> 
-        <p> Preencha as informações abaixo para obter o seu teste grátis</p>
-        
-        <div class="field">
-            <label for="nome">E-mail:</label>
-            <input type="text" id="email" name="email" placeholder="Digite seu E-mail" required>
+    <div>
+        <form method="post" action="cadastraTeste">
+        <div>
+            <label for="email_c">E-mail</label>
+            <input type="text" id="email_c" name="email_c" placeholder="Digite seu e-mail">
         </div>
-        
-        <div class="field">
-            <label for="telefone">Whatsapp</label>
-            <input type="text" id="telefone" name="telefone" placeholder="(xx) 00000-0000">
+        <div>
+            <label for="numero"> Whatsapp</label>
+            <input type="password" id="numero" name="numero" placeholder="Digite sua número">
         </div>
+        <input type="submit" name="enviar" value="Quero testar grátis">
+        </form>
+    </div>
 
-        <button class="button is-block is-info is-large is-fullwidth">Quero testar grátis</button>
-    </form>
+</body>
