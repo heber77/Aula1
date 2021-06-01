@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="Cadastro"  align= center>
+    Aprenda Marketing Digital com apenas um CLICK
+  </h1>
+<center><br>
+    <div style="float:left; width:50%"><img src="sua imagem aqui"></div>
+    <div style="float:left; width:50%"><img src="sua imagem aqui"></div>
+    <button style="float:left; width:50%" class= "home_1" href="{{ url_for('auth.signup') }}">Tenho um negócio Físico </button>
+    <button style="float:left; width:50%" class= "home_2" href="{{ url_for('auth.signup') }}">Tenho um negócio Online </button>
+    </center>
+    <br>
+{% endblock %}
