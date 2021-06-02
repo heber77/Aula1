@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="Cadastro"  align= center>
+    Aprenda Marketing Digital com apenas um CLICK
+  </h1>
+<center><br>
+    <div style="float:left; width:50%"><img src="static/imagens/negocio_fisico.png"></div>
+    <div style="float:left; width:50%"><img src="static/imagens/negocio_online.png"></div>
+    <a href="{{ url_for('main.signup_1') }}" align = "center"><button style="float:left; width:50%"  class= "home_1" >Tenho um negócio Físico </button></a>
+    <a href="{{ url_for('main.signup_2') }}"><button style="float:left; width:50%" class= "home_2" >Tenho um negócio Online </button></a>
+    </center>
+    <center><h1 style="float:left; width:50%" >Aprenda estratégias para alavancar seu negócio físico através do meio digital.
+    </h1>
+    <h1 style="float:left; width:50%" > Aprenda estratégias para alavancar criar o seu próprio negócio online.
+    </h1></center>
+    <br>
+{% endblock %}

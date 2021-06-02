@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block content %}
+<center>
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Cadastre-se</h3>
+    <div class="box">
+        <form method="POST" action="/Cadastre-se">
+
+            <P>Nome Completo</P>
+            <div class="field">
+                <label for="nome">Nome:</label>
+                <div class="control">
+                    <input class="input is-large" type="text" name="name" placeholder="Seu name" autofocus="">
+                </div>
+            </div>
+
+
+
+            
+            <div class="field">
+                <label for="nome">E-mail:</label>
+                <div class="control">
+                    <input class="input is-large" type="email" name="email" placeholder="E-mail" autofocus="">
+                </div>
+            </div>
+
+
+            
+            <div class="field">
+                <label for="nome">Número do celular:</label>
+                <div class="control">
+                    <input class="input is-large" type="contato" name="numero" placeholder="(xx) 00000 - 0000" autofocus="">
+                </div>
+            </div>
+
+            
+            <div class="field">
+                <label for="nome">Data de Nascimento:</label>
+                <div class="control">
+                    <input class="input is-large" type="text" name="data_de_nascimento" placeholder="01/01/1990" autofocus="">
+                </div>
+            </div>
+            
+            <p>Senha:</p>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="password" placeholder="Sua Senha">
+                </div>
+            </div>
+            <p>Confirmação de senha:</p>
+            <div class="field">
+                <div class="control">
+                    <input class="input is-large" type="password" name="password" placeholder="Sua Senha">
+                </div>
+            </div>
+            
+            <label>Que tipo de négocio você tem mesmo:
+                <center>
+                <select name="negocio" id="negocio">
+                    <optgroup>
+                        <option type = "Usuario_1" value="fisico">Tenho um negócio Físico</option>
+                        <option  type = "Usuario_2" value="online">Tenho um negócio Online</option>
+                        <option  type = "auth" value="nenhuma">Nenhuma das opções</option>
+                    </optgroup>
+                </select>
+            </center>
+            </label>
+            <p>Anexo de Foto abaixo:</p>
+            <div class="col-sm-6">
+                <form action = "/uploader" method = "POST" enctype = "multipart/form-data">
+                <input type = "file" name = "file" />
+                </form>
+            </div>  
+
+            <button class="button is-block is-info is-large is-fullwidth">Quero ser um Aluno</button>
+        </form>
+    </div>
+</div>
+</center>
+{% endblock %}
