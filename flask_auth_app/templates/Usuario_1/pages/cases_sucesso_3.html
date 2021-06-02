@@ -1,0 +1,37 @@
+{% extends "base_2.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen" />
+<video id="custom_video_play" width="400" controls="controls">>
+<source src="Yes Bank Advertisment.mp4" type="video/mp4"><source src="mov_bbb.flv" type="video/flv"> Browser Not Supporting
+</video>
+</div>
+<script>
+var myVideo=document.getElementById("custom_video_play");
+function makeBig()
+{
+myVideo.width=650;
+}
+function makeSmall()
+{
+myVideo.width=350;
+}
+
+function makeNormal()
+{
+myVideo.width=450;
+}
+</script>
+<div style="text-align:left">
+<button onclick="makeBig()">Adjust: Large Screen</button>
+<button onclick="makeSmall()">Adjust: Small Screen</button>
+<button onclick="makeNormal()">Adjust: Normal Screen</button>
+</div>
+
+<div>
+<button align= center href="{{ url_for('main.cases_sucesso') }}" class= "um">1</button>
+<button align= center href="{{ url_for('main.cases_sucesso_2') }}" class ="dois">2</button>
+<button align= center href="{{ url_for('main.cases_sucesso_3') }}" class ="Tres">3</button>
+<button align= center href="{{ url_for('main.cases_sucesso_4') }}" class ="quatro">4</button>
+<button align= center href="{{ url_for('main.cases_sucesso_5') }}" class ="cinco">5</button>
+</div>
+{% endblock %}
