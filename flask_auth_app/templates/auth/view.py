@@ -41,7 +41,7 @@ def anexar_case():
 def suporte():
     return render_template('suporte.html',suporte)
 
-@Usuario_2.route("/templates/auth/pages/duvidas_txt")
+@auth.route("/templates/auth/pages/duvidas_txt")
 def duvidas_txt():
     return render_template('duvidas_txt.html',duvidas_txt)
 
@@ -60,9 +60,9 @@ def curso():
 
 from flask import Blueprint, render_template, redirect, url_for, request
 #from werkzeug.security import generate_password_hash, check_password_hash
-from  flask.ext.bcrypt  import  Bcrypt 
-from .models import User
-from . import db
+from flask_bcrypt import Bcrypt
+from flask_auth_app.models import User
+from flask_auth_app import db
 
 ...
 @auth.route('/templates/signup', methods=['POST'])
@@ -100,7 +100,7 @@ def signup_post():
 
 
 from flask_login import login_user, logout_user, login_required,LoginManager,current_user
-from __init__ import create_app
+from flask_auth_app import create_app
 ...
 
 @auth.route("/templates/auth/pages/base_2")
@@ -118,7 +118,7 @@ def load_user(user_id):
 @auth.route('templates/base', methods=['GET', 'POST'])
 def login():
     # Here we use a class of some kind to represent and validate our
-    # client-side form data. For example, WTForms is a library that will
+    # client-side form dat. For example, WTForms is a library that will
     # handle this for us, and we use a custom LoginForm to validate.
     form = LoginForm()
     if form.validate_on_submit():
