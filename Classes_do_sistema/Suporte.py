@@ -3,8 +3,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 class Suporte:
-    def __init__(self, duvida):
-        self.duvida = duvida
+    def __init__(self):
+        pass
 
     def enviarDuvida(self, duvida):
         # Criando um objeto mensagem
