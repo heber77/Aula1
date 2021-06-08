@@ -18,11 +18,11 @@
     <div align="left">
 
         <font color="white">
-            <a href="index.html"> Home</a> &nbsp;&nbsp;
-            <a href="testegratis.html"> Teste Grátis</a> &nbsp;&nbsp;
-            <a href="cases.html"> Cases de sucesso</a> &nbsp;&nbsp;
-            <a href="duvidas.html"> Dúvidas</a> &nbsp;&nbsp;
-            <a href="suporte.html"> Suporte</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="index"> Home</a> &nbsp;&nbsp;
+            <a href="testegratis"> Teste Grátis</a> &nbsp;&nbsp;
+            <a href="cases"> Cases de sucesso</a> &nbsp;&nbsp;
+            <a href="duvidas"> Dúvidas</a> &nbsp;&nbsp;
+            <a href="suporte"> Suporte</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
             <label for="email">E-mail: </label>
             <input type="email" id="email" name="email">
@@ -51,8 +51,9 @@
     <p>
         Digite seu problema na caixinha abaixo:
     </p>
+    <form method="POST" action="envia">
+        <textarea name="duvida" rows="10" cols="40" maxlength="500"></textarea>
 
-    <textarea rows="10" cols="40" maxlength="500"></textarea>
-
-    <input type="submit" value="Enviar dúvida">
+        <input type="submit" name="enviar" value="Enviar dúvida">
+    </form>
 </div>
